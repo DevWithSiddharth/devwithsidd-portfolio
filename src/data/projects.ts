@@ -50,6 +50,7 @@ export const projects: Project[] = [
     category: "Python",
     tech: ["Python", "Pygame"],
     status: "Completed",
+    featured: true,
     github: "https://github.com/DevWithSiddharth/Python-Snake-Game",
     caseStudy: {
       motivation: "To build a feature-rich, polished version of the classic arcade game with clean, beginner-friendly code.",
@@ -103,6 +104,7 @@ export const projects: Project[] = [
   {
     slug: "getmusic",
     name: "GetMusic",
+    featured: true,
     description:
       "A sleek dark-themed music streaming platform with playlist creation, discovery features, and a comprehensive administrator dashboard.",
     category: "Backend",
