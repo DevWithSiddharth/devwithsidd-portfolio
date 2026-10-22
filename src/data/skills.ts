@@ -59,7 +59,6 @@ const rawSkillGroups: SkillGroup[] = [
     skills: [
       { name: "Pandas", level: "Learning" },
       { name: "PyTorch", level: "Learning" },
-      { name: "LangChain", level: "Learning" },
       { name: "OpenCV", level: "Learning" },
       { name: "Qt", level: "Learning" },
       { name: "Arduino", level: "Learning" },
