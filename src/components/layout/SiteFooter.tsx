@@ -20,7 +20,6 @@ export function SiteFooter() {
         </nav>
         <div className="flex gap-2 md:justify-end">
           <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="grid size-10 place-items-center rounded-md border border-border hover:border-primary hover:text-primary"><Github className="size-4" /></a>
-          <a href={`mailto:${profile.email}`} aria-label="Email" className="grid size-10 place-items-center rounded-md border border-border hover:border-primary hover:text-primary"><Mail className="size-4" /></a>
         </div>
       </div>
       <p className="border-t border-border py-4 text-center font-mono text-xs text-muted-foreground">© {new Date().getFullYear()} {profile.name} — compiled with caffeine.</p>
