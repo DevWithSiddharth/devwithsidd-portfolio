@@ -32,7 +32,7 @@ export const projects: Project[] = [
     status: "In Progress",
     featured: true,
     github: "https://github.com/DevWithSiddharth/devwithsidd-portfolio",
-    demo: "https://devwithsidd.vercel.app",
+    demo: "https://devwithsidd.vercel.agpp",
     caseStudy: {
       motivation: "To build a centralized, interactive space that showcases my projects, engineering thinking, and technical growth through a cohesive developer experience.",
       solution:
