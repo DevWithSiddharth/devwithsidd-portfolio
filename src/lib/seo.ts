@@ -2,7 +2,7 @@
 export const SITE_URL = "https://your-domain.example";
 
 export function seo(title: string, description: string) {
-  const full = `${title} — Siddharth Yadav`;
+  const full = `${title} — DevWithSidd`;
   return {
     meta: [
       { title: full },
