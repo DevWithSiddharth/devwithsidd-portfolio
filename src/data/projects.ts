@@ -31,7 +31,7 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "Tailwind CSS"],
     status: "In Progress",
     featured: true,
-    github: "https://github.com/DevWithSiddharth",
+    github: "https://github.com/DevWithSiddharth/devwithsidd-portfolio",
     demo: "https://devwithsidd.vercel.app",
     caseStudy: {
       motivation: "To build a centralized, interactive space that showcases my projects, engineering thinking, and technical growth through a cohesive developer experience.",
