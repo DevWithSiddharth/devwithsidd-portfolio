@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="20" x2="1110" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#173c4b"/>
+      <stop offset=".52" stop-color="#142b3d"/>
+      <stop offset="1" stop-color="#282447"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="300" y1="120" x2="900" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eead4" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#818cf8" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="line" x1="300" y1="480" x2="900" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#a5b4fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#bg)"/>
+  <circle cx="930" cy="140" r="270" fill="#7c3aed" fill-opacity=".12"/>
+  <circle cx="260" cy="590" r="320" fill="#14b8a6" fill-opacity=".1"/>
+  <rect x="62" y="58" width="1076" height="604" rx="24" fill="#0b1422" fill-opacity=".56" stroke="#dbeafe" stroke-opacity=".18"/>
+  <path d="M62 118h1076" stroke="#dbeafe" stroke-opacity=".16"/>
+  <circle cx="99" cy="88" r="8" fill="#fb7185"/>
+  <circle cx="127" cy="88" r="8" fill="#fbbf24"/>
+  <circle cx="155" cy="88" r="8" fill="#34d399"/>
+  <rect x="110" y="158" width="980" height="456" rx="18" fill="url(#glow)" fill-opacity=".48"/>
+  <rect x="148" y="194" width="270" height="16" rx="8" fill="#e2e8f0" fill-opacity=".76"/>
+  <rect x="148" y="226" width="420" height="10" rx="5" fill="#cbd5e1" fill-opacity=".38"/>
+  <rect x="148" y="264" width="174" height="42" rx="21" fill="#5eead4" fill-opacity=".82"/>
+  <rect x="148" y="344" width="902" height="214" rx="14" fill="#0b1422" fill-opacity=".44" stroke="#e2e8f0" stroke-opacity=".16"/>
+  <path d="m188 500 112-88 96 53 119-111 107 86 117-122 126 101" stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <circle cx="515" cy="354" r="10" fill="#a5b4fc"/>
+  <circle cx="622" cy="440" r="10" fill="#a5b4fc"/>
+  <circle cx="739" cy="318" r="10" fill="#a5b4fc"/>
+  <text x="148" y="588" fill="#e2e8f0" fill-opacity=".7" font-family="Arial, sans-serif" font-size="18" letter-spacing="3">REPLACE WITH YOUR PROJECT SCREENSHOT</text>
+</svg>

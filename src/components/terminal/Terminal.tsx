@@ -21,9 +21,14 @@ export function Terminal({ className = "" }: { className?: string }) {
 
   const submit = (cmd: string) => {
     const res = runCommand(cmd);
-    if (res === "clear") return setLines([]);
-    setLines((l) => [...l, { kind: "in", text: cmd }, ...res.map((t) => ({ kind: "out" as const, text: t }))]);
     if (cmd.trim()) setHistory((h) => [cmd, ...h].slice(0, 50));
+    if (res === "clear") {
+      setLines([]);
+      return;
+    }
+
+    const output = res.filter((text, index, items) => text.trim() && (index === 0 || text !== items[index - 1]));
+    setLines((l) => [...l, { kind: "in", text: cmd }, ...output.map((t) => ({ kind: "out" as const, text: t }))]);
   };
 
   const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -65,7 +70,7 @@ export function Terminal({ className = "" }: { className?: string }) {
       </div>
       <div className="flex flex-wrap gap-1.5 border-t border-border/60 p-3">
         {Object.keys(commandHelp).map((c) => (
-          <button key={c} onClick={() => submit(c)} className="rounded border border-border/60 px-2 py-1 font-mono text-xs opacity-80 hover:border-cyan hover:text-cyan hover:opacity-100">{c}</button>
+          <button key={c} onClick={() => submit(c.split(" ")[0]!)} className="rounded border border-border/60 px-2 py-1 font-mono text-xs opacity-80 hover:border-cyan hover:text-cyan hover:opacity-100">{c}</button>
         ))}
       </div>
     </div>

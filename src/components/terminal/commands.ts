@@ -1,6 +1,6 @@
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
-import { skillGroups } from "@/data/skills";
+import { allSkills, skillGroups } from "@/data/skills";
 import { learning } from "@/data/learning";
 
 // Pure simulation: maps known command names to text built from portfolio data.
@@ -9,16 +9,20 @@ export const commandHelp: Record<string, string> = {
   help: "list available commands",
   about: "who is Siddharth?",
   skills: "technologies by category",
-  projects: "list of projects",
+  stack: "quick list of technologies",
+  "projects [search]": "list projects, optionally filtered by text",
   learning: "what I'm currently exploring",
   contact: "how to reach me",
   github: "my GitHub profile",
+  socials: "social profile links",
+  repo: "this portfolio's source code",
   clear: "clear the screen",
 };
 
 export function runCommand(raw: string): string[] | "clear" {
   const cmd = raw.trim().toLowerCase();
-  switch (cmd) {
+  const [name, ...args] = cmd.split(/\s+/);
+  switch (name) {
     case "":
       return [];
     case "help":
@@ -27,8 +31,18 @@ export function runCommand(raw: string): string[] | "clear" {
       return [`${profile.name} — ${profile.role}`, ...profile.bio];
     case "skills":
       return skillGroups.map((g) => `${g.category}: ${g.skills.map((s) => `${s.name} (${s.level})`).join(", ")}`);
+    case "stack":
+      return [allSkills.join(" · ")];
     case "projects":
-      return projects.map((p) => `• ${p.name} [${p.status}]${p.placeholder ? " (placeholder)" : ""} — ${p.tech.join(", ")}`);
+      {
+        const query = args.join(" ");
+        const matches = projects.filter((p) =>
+          [p.name, p.description, ...p.tech].some((value) => value.toLowerCase().includes(query)),
+        );
+        return matches.length
+          ? matches.map((p) => `• ${p.name} [${p.status}]${p.placeholder ? " (placeholder)" : ""} — ${p.tech.join(", ")}`)
+          : [`No projects matched "${query}".`];
+      }
     case "learning":
       return learning.map((l) => `• ${l.topic} — ${l.status}`);
     case "contact":
@@ -38,6 +52,10 @@ export function runCommand(raw: string): string[] | "clear" {
       ];
     case "github":
       return [profile.github];
+    case "socials":
+      return profile.socials.map((social) => `${social.label}: ${social.url}`);
+    case "repo":
+      return ["https://github.com/DevWithSiddharth/devwithsidd-portfolio"];
     case "clear":
       return "clear";
     default:

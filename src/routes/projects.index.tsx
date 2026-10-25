@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { filterProjects, projectCategories, projects } from "@/data/projects";
 import { Container, PageHeader } from "@/components/common/ui";
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import { ScrollReveal } from "@/components/common/ScrollReveal";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/projects/")({
@@ -123,7 +124,9 @@ function Projects() {
         {list.length > 0 ? (
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+              <ScrollReveal key={p.slug} className="h-full">
+                <ProjectCard project={p} />
+              </ScrollReveal>
             ))}
           </div>
         ) : (

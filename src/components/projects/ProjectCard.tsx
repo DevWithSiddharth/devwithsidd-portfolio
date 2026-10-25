@@ -15,9 +15,19 @@ export function ProjectCard({ project }: { project: Project }) {
   const accent = previewStyles[project.category] ?? previewStyles["Web"];
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift sm:p-1">
-      <div className="relative overflow-hidden rounded-t-[1.35rem] border-b border-border/50 bg-slate-950 p-4 sm:p-5">
-        <div className="absolute inset-0 opacity-90" style={{ background: accent }} aria-hidden />
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift sm:p-1">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-t-[1.35rem] border-b border-border/50 bg-slate-950 p-4 sm:p-5">
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt ?? `Project preview image for ${project.name}`}
+            className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="absolute inset-0 opacity-90" style={{ background: accent }} aria-hidden />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" aria-hidden />
         <div className="relative flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" aria-hidden />
@@ -54,7 +64,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="mt-4 flex flex-wrap gap-1.5">{project.tech.map((t) => <Tag key={t}>{t}</Tag>)}</div>
         <div className="relative z-10 mt-5 flex items-center gap-3 text-sm">
           <ExternalLink href={project.github} className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground shadow-button transition-all hover:border-primary hover:text-foreground"><Github className="size-4" /> Code</ExternalLink>
-          <ExternalLink href={project.demo} className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-primary-foreground shadow-button transition-all hover:-translate-y-0.5"><ArrowUpRight className="size-4" /> Live</ExternalLink>
+          <ExternalLink href={project.demo} className="inline-flex items-center gap-1 rounded-full bg-gradient-accent px-3 py-1.5 text-primary-foreground shadow-button transition-all hover:-translate-y-0.5"><ArrowUpRight className="size-4" /> Live</ExternalLink>
         </div>
       </div>
     </article>

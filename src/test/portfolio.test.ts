@@ -18,6 +18,24 @@ describe("portfolio rules", () => {
     expect(runCommand("clear")).toBe("clear");
     expect((runCommand("rm -rf /") as string[])[0]).toContain("command not found");
   });
+  it("terminal offers useful portfolio commands and project search", () => {
+    expect(runCommand("about")[0]).toContain("Siddharth Yadav");
+    expect(runCommand("projects color catcher")[0]).toContain("Color Catcher");
+    expect(runCommand("projects no-such-project")[0]).toContain("No projects matched");
+    expect(runCommand("repo")[0]).toContain("github.com/DevWithSiddharth/devwithsidd-portfolio");
+    expect((runCommand("resume") as string[])[0]).toContain("command not found");
+  });
+  it("projects use real screenshots when available and placeholder previews otherwise", () => {
+    const timeReaper = projects.find((project) => project.slug === "timereaper");
+    expect(timeReaper?.image).toBe("/projects/TimeReaper/Dashboard.png");
+    expect(timeReaper?.screenshots).toContainEqual({
+      src: "/projects/TimeReaper/Dashboard.png",
+      alt: "TimeReaper dashboard",
+    });
+    expect(projects.filter((project) => project.slug !== "timereaper").every(
+      (project) => project.image === "/projects/preview-placeholder.svg",
+    )).toBe(true);
+  });
   it("contact form requires a valid email", () => {
     expect(validateContact({ name: "Sid", email: "bad", subject: "Hello", message: "Long enough msg" }).email).toBeTruthy();
   });

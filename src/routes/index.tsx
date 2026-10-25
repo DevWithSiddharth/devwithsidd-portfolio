@@ -6,6 +6,7 @@ import { allSkills } from "@/data/skills";
 import { learning } from "@/data/learning";
 import { Container, SectionLabel, StatusBadge, Tag } from "@/components/common/ui";
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import { ScrollReveal } from "@/components/common/ScrollReveal";
 import { Terminal } from "@/components/terminal/Terminal";
 import { seo } from "@/lib/seo";
 
@@ -34,7 +35,7 @@ function Home() {
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{profile.intro}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full bg-gradient-accent px-5 py-2.5 font-medium text-primary-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
                 View projects <ArrowRight className="size-4" />
               </Link>
               <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-medium text-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary">
@@ -94,11 +95,13 @@ function Home() {
               { step: "02", title: "Build for clarity", text: "I prefer clean interfaces, clear flows, and maintainable architecture over visual noise." },
               { step: "03", title: "Ship and learn", text: "Each project teaches the next one — I iterate quickly, test what matters, and refine as I go." },
             ].map((item) => (
-              <div key={item.title} className="soft-panel rounded-[1.5rem] p-5">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-mono text-sm text-primary">{item.step}</div>
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.text}</p>
-              </div>
+              <ScrollReveal key={item.title} className="h-full" delay={Number(item.step) * 60}>
+                <div className="soft-panel h-full rounded-[1.5rem] p-5">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-mono text-sm text-primary">{item.step}</div>
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.text}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </Container>
@@ -115,7 +118,11 @@ function Home() {
               All projects →
             </Link>
           </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">{featured.map((p) => <ProjectCard key={p.slug} project={p} />)}</div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">{featured.map((p, index) => (
+            <ScrollReveal key={p.slug} className="h-full" delay={index * 90}>
+              <ProjectCard project={p} />
+            </ScrollReveal>
+          ))}</div>
         </Container>
       </section>
 

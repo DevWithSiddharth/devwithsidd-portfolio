@@ -1,80 +1,54 @@
-<h1 align="center">Hey 👋 I'm Siddharth Yadav</h1>
-<h3 align="center">🚀 19 y/o Student | Python AI/ML & Web Dev Enthusiast | Problem Solver & Code Explorer</h3>
+# Siddharth Yadav
 
+<h3 align="center">Student | Python AI/ML & Web Developer | Problem Solver</h3>
 
+I’m a curious developer who enjoys building practical, creative, and impactful digital experiences. My interests span frontend development, backend logic, Python, AI/ML, and solving real-world problems through code.
 
+## About Me
 
-## 🧑‍💻 About Me
+- 🎓 Student developer passionate about learning by building
+- 💻 Interested in both frontend and backend development
+- 🌱 Exploring Python, AI, machine learning, and modern web tools
+- 🧠 Strong believer in debugging, iteration, and continuous learning
+- 📂 Portfolio and projects: [GitHub](https://github.com/DevWithSiddharth)
+- 💬 Open to discussing web development, Python, APIs, AI, and creative tech ideas
 
-- 🎓 19-year-old student, navigating life one code snippet at a time  
-- 💻 I love breaking things in **frontend & backend** and then somehow making them work  
-- 🌱 Exploring **Python, AI & Machine Learning** (and occasionally wondering what I’m doing 😅)  
-- 🧠 Learning by doing, debugging like a mad scientist, surviving on caffeine  
-- 📂 Peek at my “oops… it works somehow” projects: [GitHub](https://github.com/DevWithSiddharth)  
-- 💬 Chat with me about **Web Dev, Python, APIs, AI, or literally anything nerdy**
+## Tech Stack
 
-
-
-## 🧰 My Developer Starter Pack
-
-### 💻 Web & Frontend
+### Web & Frontend
 <div align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,react,nextjs,tailwind,bootstrap,figma" height="60" />
 </div>
 
-### 🖥️ Backend & Databases
+### Backend & Databases
 <div align="center">
   <img src="https://skillicons.dev/icons?i=nodejs,express,mongodb,mysql,postgres,php" height="60" />
 </div>
 
-### 🐍 Python & AI / Data
+### Python & AI / Data
 <div align="center">
   <img src="https://skillicons.dev/icons?i=python,opencv,qt,pytorch" height="60" />
 </div>
 
-### ☁️ Cloud & DevOps
+### Cloud & Tools
 <div align="center">
   <img src="https://skillicons.dev/icons?i=aws,git,linux,bash" height="60" />
 </div>
 
-### 🤖 Electronics & Misc
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=arduino" height="60" />
-</div>
+## What I’m Working On
 
+- Building projects that combine code, design, and functionality
+- Exploring AI-powered and data-driven applications
+- Strengthening my frontend and full-stack problem-solving skills
+- Learning by shipping small but meaningful experiments
 
+## Connect
 
-## 🌐 Connect With Me
+- 📫 Email: [devwithsid.tech@gmail.com](mailto:devwithsid.tech@gmail.com)
+- 💻 GitHub: [DevWithSiddharth](https://github.com/DevWithSiddharth)
 
-📫 **Email Me:** [devwithsid.tech@gmail.com](mailto:devwithsid.tech@gmail.com)  
-💻 **GitHub:** [DevWithSiddharth](https://github.com/DevWithSiddharth)  
+## Quick Summary
 
+I enjoy creating things with code, learning fast, and improving with every project I build. I’m always looking for opportunities to grow, collaborate, and turn ideas into working solutions.
 
-
-
-## 🎯 Random Things About Me
-
-- ⚡ Love building stuff that sometimes works… sometimes explodes  
-- 🧩 Debugging = my daily brain workout  
-- 🚀 Always trying to learn new tricks and level up  
-- 🎮 Mostly coding… occasionally gaming… rarely sleeping  
-
-
-
-
-## 🔥 Current Side Quests
-
-- 🤖 Experimenting with **AI + Web projects** (because why not?)  
-- 🌍 Learning by building, failing, and laughing at my mistakes  
-- 📈 Slowly leveling up my dev skills every single day  
-
-
-## ☕ Caffeine, Code & Chaos
-
-- 🚀 Turning caffeine ☕ into code that sometimes works… sometimes blows up 💥
-- 💻 Coding experiments: 50% genius, 50% chaos, 100% coffee ☕⚡
-- ⚡ Debugging like a mad scientist, powered by coffee and questionable life choices ☕🧪  
-
-
-<h3 align="center">⚡ If you're reading this, my README worked.</h3>
-<h3 align="center">Thanks for stopping byeee! 👋</h3>
+<h3 align="center">Thanks for visiting! 👋</h3>
