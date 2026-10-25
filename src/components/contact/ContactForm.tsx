@@ -56,7 +56,7 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">{field("name", "Name")}{field("email", "Email", "email")}</div>
       {field("subject", "Subject")}
       {field("message", "Message")}
-      <button disabled={state === "sending"} className="rounded-md bg-primary px-4 py-2.5 font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60">{state === "sending" ? "Sending…" : "Send message"}</button>
+      <button disabled={state === "sending"} className="rounded-full bg-primary px-4 py-2.5 font-medium text-primary-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift disabled:cursor-not-allowed disabled:opacity-60">{state === "sending" ? "Sending…" : "Send message"}</button>
       <div role="status" aria-live="polite">
         {state === "sent" && <p className="text-sm text-success">Thanks! Your message was delivered.</p>}
         {state === "error" && <p className="text-sm text-destructive">Couldn't send right now. Please email directly instead.</p>}

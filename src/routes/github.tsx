@@ -16,7 +16,7 @@ async function fetchRepos(): Promise<Repo[]> {
 }
 
 export const Route = createFileRoute("/github")({
-  head: () => seo("GitHub", "Public repositories from Siddharth Yadav's GitHub — DevWithSiddharth."),
+  head: () => seo("GitHub", "Public repositories from Siddharth Yadav's GitHub — DevWithSiddharth.", "/github"),
   component: GitHubPage,
 });
 
@@ -25,7 +25,7 @@ function GitHubPage() {
   return (
     <>
       <PageHeader label="github" title={<>@{profile.handle}</>}>
-        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-base font-medium text-primary-foreground hover:opacity-90"><Github className="size-4" /> Open GitHub profile</a>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-base font-medium text-primary-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"><Github className="size-4" /> Open GitHub profile</a>
       </PageHeader>
       <Container className="py-12">
         {isLoading && <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-36 animate-pulse rounded-xl border border-border bg-card" />)}</div>}
@@ -39,7 +39,7 @@ function GitHubPage() {
         {data && data.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data.map((r) => (
-              <article key={r.id} className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-card hover:border-primary/50">
+              <article key={r.id} className="flex flex-col rounded-[1.5rem] border border-border bg-card p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift">
                 <h2 className="flex items-start justify-between gap-2 font-mono text-sm font-semibold">
                   <span className="break-all">{r.name}</span>
                   <ExternalLink href={r.html_url} aria-label={`Open ${r.name} on GitHub`} className="text-muted-foreground hover:text-primary"><LinkIcon className="size-4" /></ExternalLink>

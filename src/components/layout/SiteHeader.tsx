@@ -29,7 +29,7 @@ export function SiteHeader() {
           <button
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-            className="grid size-10 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+            className="grid size-10 place-items-center rounded-full border border-border bg-card text-muted-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-foreground"
           >
             {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </button>
@@ -38,7 +38,7 @@ export function SiteHeader() {
             aria-label="Toggle menu"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground lg:hidden"
+            className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground shadow-button lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>

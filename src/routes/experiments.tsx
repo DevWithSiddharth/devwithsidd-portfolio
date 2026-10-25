@@ -12,7 +12,7 @@ const registry: Record<ExperimentId, ComponentType> = {
 };
 
 export const Route = createFileRoute("/experiments")({
-  head: () => seo("Coding Lab", "Browser-based coding experiments: a sorting visualiser and a safe snippet runner."),
+  head: () => seo("Coding Lab", "Browser-based coding experiments: a sorting visualiser and a safe snippet runner.", "/experiments"),
   component: Experiments,
 });
 

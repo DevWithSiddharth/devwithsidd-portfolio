@@ -18,7 +18,7 @@ export const Route = createFileRoute("/projects/$slug")({
   },
   head: ({ loaderData }) =>
     loaderData
-      ? seo(loaderData.project.name, loaderData.project.description)
+      ? seo(loaderData.project.name, loaderData.project.description, `/projects/${loaderData.project.slug}`)
       : {
           meta: [
             { title: "Project not found" },

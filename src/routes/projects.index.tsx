@@ -10,7 +10,8 @@ export const Route = createFileRoute("/projects/")({
   head: () =>
     seo(
       "Projects",
-      "Projects by Siddharth Yadav — completed work, works in progress and experiments."
+      "Projects by Siddharth Yadav — completed work, works in progress and experiments.",
+      "/projects"
     ),
   component: Projects,
 });
@@ -38,7 +39,7 @@ function Projects() {
 
       <Container className="py-10 md:py-14">
         {/* Filter Controls Container */}
-        <div className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+        <div className="space-y-4 rounded-[1.5rem] border border-border/60 bg-card/40 p-4 shadow-card backdrop-blur-sm sm:p-5">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             {/* Search Input */}
             <div className="relative flex-1">
@@ -61,7 +62,7 @@ function Projects() {
                 <button
                   type="button"
                   onClick={() => setQ("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground shadow-button"
                   aria-label="Clear search input"
                 >
                   <X className="size-3.5" />
@@ -82,9 +83,9 @@ function Projects() {
                     key={c}
                     aria-pressed={isActive}
                     onClick={() => setCat(c)}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                       isActive
-                        ? "bg-primary text-primary-foreground shadow-xs"
+                        ? "bg-primary text-primary-foreground shadow-button"
                         : "border border-border/60 bg-background/50 text-muted-foreground hover:border-border hover:bg-accent/50 hover:text-foreground"
                     }`}
                   >
@@ -97,7 +98,7 @@ function Projects() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="ml-auto inline-flex items-center gap-1 rounded-lg border border-dashed border-border/80 px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:border-border hover:bg-destructive/10 hover:text-destructive sm:ml-1"
+                  className="ml-auto inline-flex items-center gap-1 rounded-full border border-dashed border-border/80 px-2.5 py-1.5 text-xs text-muted-foreground shadow-button transition-colors hover:border-border hover:bg-destructive/10 hover:text-destructive sm:ml-1"
                 >
                   <X className="size-3" /> Clear filters
                 </button>
@@ -126,7 +127,7 @@ function Projects() {
             ))}
           </div>
         ) : (
-          <div className="mt-8 flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-border/70 bg-card/20 p-8 text-center backdrop-blur-xs">
+          <div className="mt-8 flex min-h-[280px] flex-col items-center justify-center rounded-[1.5rem] border border-dashed border-border/70 bg-card/20 p-8 text-center shadow-card backdrop-blur-xs">
             <div className="flex size-12 items-center justify-center rounded-full bg-accent/60 text-muted-foreground">
               <FolderKanban className="size-6" />
             </div>
@@ -139,7 +140,7 @@ function Projects() {
             <button
               type="button"
               onClick={handleReset}
-              className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3.5 py-2 text-xs font-medium text-foreground transition-all hover:bg-accent"
+              className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-2 text-xs font-medium text-foreground shadow-button transition-all hover:bg-accent"
             >
               <SlidersHorizontal className="size-3.5" /> Reset all filters
             </button>

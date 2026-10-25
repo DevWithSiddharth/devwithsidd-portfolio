@@ -10,7 +10,7 @@ import { Terminal } from "@/components/terminal/Terminal";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => seo("Student Developer", "Siddharth Yadav — student developer building with web tech, Python and APIs. Open to internships, freelance and collaboration."),
+  head: () => seo("Student Developer", "Siddharth Yadav — student developer building with web tech, Python and APIs. Open to internships, freelance and collaboration.", "/"),
   component: Home,
 });
 
@@ -27,20 +27,20 @@ function Home() {
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground shadow-card">
               <span className="size-2 rounded-full bg-success" aria-hidden /> open to internships & freelance
             </p>
-            <h1 className="mt-6 max-w-xl text-4xl font-bold leading-[0.96] tracking-[-0.06em] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 max-w-xl text-4xl font-extrabold leading-[0.92] tracking-[-0.07em] sm:text-5xl lg:text-[4.4rem]">
               I build <span className="text-gradient">thoughtful</span>
               <br /> digital products.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{profile.intro}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-card transition-transform hover:-translate-y-0.5">
+              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift">
                 View projects <ArrowRight className="size-4" />
               </Link>
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-medium text-foreground transition-colors hover:border-primary hover:text-primary">
+              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-medium text-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary">
                 <Mail className="size-4" /> Contact
               </Link>
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-medium text-foreground transition-colors hover:border-primary hover:text-primary">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 font-medium text-foreground shadow-button transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:text-primary">
                 <Github className="size-4" /> GitHub
               </a>
             </div>
@@ -79,6 +79,28 @@ function Home() {
           <Link to="/skills" className="ml-1 font-mono text-[11px] uppercase tracking-[0.12em] text-primary hover:underline">
             see all
           </Link>
+        </Container>
+      </section>
+
+      <section className="py-20">
+        <Container>
+          <div className="mb-8 max-w-2xl">
+            <SectionLabel>how I work</SectionLabel>
+            <h2 className="mt-2 text-3xl font-bold tracking-[-0.04em]">I like clean systems, usable products, and honest shipping.</h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              { step: "01", title: "Think it through", text: "I start with the problem, the user, and the simplest valuable outcome before I write code." },
+              { step: "02", title: "Build for clarity", text: "I prefer clean interfaces, clear flows, and maintainable architecture over visual noise." },
+              { step: "03", title: "Ship and learn", text: "Each project teaches the next one — I iterate quickly, test what matters, and refine as I go." },
+            ].map((item) => (
+              <div key={item.title} className="soft-panel rounded-[1.5rem] p-5">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-mono text-sm text-primary">{item.step}</div>
+                <h3 className="text-xl font-semibold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
