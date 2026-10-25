@@ -12,17 +12,18 @@ export function ExternalLink({ href, className, children, ...rest }: { href?: st
 }
 
 export function SectionLabel({ children }: { children: ReactNode }) {
-  return <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan">// {children}</p>;
+  return <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-primary">// {children}</p>;
 }
 
 export function PageHeader({ label, title, children }: { label: string; title: ReactNode; children?: ReactNode }) {
   return (
-    <header className="relative border-b border-border bg-grid">
+    <header className="relative overflow-hidden border-b border-border bg-card/40">
+      <div className="absolute inset-0 bg-grid opacity-80" aria-hidden />
       <div className="absolute inset-0 bg-glow" aria-hidden />
       <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <SectionLabel>{label}</SectionLabel>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
-        {children && <div className="mt-4 max-w-2xl text-lg text-muted-foreground">{children}</div>}
+        <h1 className="mt-4 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">{title}</h1>
+        {children && <div className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">{children}</div>}
       </div>
     </header>
   );

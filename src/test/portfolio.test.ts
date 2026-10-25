@@ -6,7 +6,11 @@ import { isSafeUrl } from "@/lib/theme";
 
 describe("portfolio rules", () => {
   it("search and category filters combine", () => {
-    expect(filterProjects(projects, "react", "Web").map((p) => p.slug)).toEqual(["developer-portfolio"]);
+    expect(filterProjects(projects, "react", "Web").map((p) => p.slug)).toEqual([
+      "developer-portfolio",
+      "timereaper",
+      "taskreaper",
+    ]);
     expect(filterProjects(projects, "react", "Python")).toEqual([]);
   });
   it("terminal clears and rejects unknown commands", () => {
