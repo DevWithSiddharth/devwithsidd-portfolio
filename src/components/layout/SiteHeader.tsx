@@ -7,13 +7,24 @@ import { useTheme } from "@/lib/theme";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/75 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="font-mono text-sm font-semibold tracking-[0.08em] text-foreground" onClick={() => setOpen(false)}>
-          <span className="text-cyan">~/</span>DevWithSidd<span className="caret-blink text-primary">_</span>
+        <Link
+          to="/"
+          className="group inline-flex shrink-0 items-center gap-3"
+          onClick={() => setOpen(false)}
+        >
+          <span className="font-mono text-sm font-semibold tracking-[0.08em] text-foreground">
+            <span className="text-cyan">~/</span>DevWithSidd
+            <span className="caret-blink text-primary">_</span>
+          </span>
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-1.5 rounded-full border border-border bg-card/70 px-1.5 py-1 shadow-card lg:flex">
+        <nav
+          aria-label="Main"
+          className="hidden items-center gap-1.5 rounded-full border border-border bg-card/70 px-1.5 py-1 shadow-card lg:flex"
+        >
           {navigation.map((n) => (
             <Link
               key={n.to}
@@ -35,7 +46,7 @@ export function SiteHeader() {
           </button>
           <button
             onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-nav"
             className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground shadow-button lg:hidden"
@@ -45,8 +56,12 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-border bg-background lg:hidden">
-          <div className="mx-auto grid max-w-6xl gap-1 px-4 py-3">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="border-t border-border bg-background lg:hidden"
+        >
+          <div className="mx-auto grid max-w-6xl gap-1 px-4 py-3 sm:px-6">
             {navigation.map((n) => (
               <Link
                 key={n.to}
