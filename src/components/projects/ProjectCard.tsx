@@ -20,42 +20,40 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift sm:p-1">
-      <div className="relative aspect-[16/9] overflow-hidden rounded-t-[1.35rem] border-b border-border/50 bg-slate-950 p-4 sm:p-5">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-t-[1.35rem] border-b border-border/50 bg-[#090d18]">
         {project.image ? (
           <img
             src={project.image}
-            alt={project.imageAlt ?? `Project preview image for ${project.name}`}
-            className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            alt={project.imageAlt ?? `Project preview for ${project.name}`}
+            className="absolute inset-[2px] size-[calc(100%-4px)] object-contain transition-transform duration-500 group-hover:scale-[1.015]"
             loading="lazy"
           />
         ) : (
-          <div className="absolute inset-0 opacity-90" style={{ background: accent }} aria-hidden />
+          <>
+            <div className="absolute inset-0 opacity-95" style={{ background: accent }} aria-hidden />
+            <div className="absolute inset-x-4 top-4 flex h-8 items-center justify-between rounded-t-lg border border-white/10 bg-black/25 px-3">
+              <div className="flex items-center gap-1.5">
+                <span className="size-2 rounded-full bg-red-400/80" aria-hidden />
+                <span className="size-2 rounded-full bg-yellow-400/80" aria-hidden />
+                <span className="size-2 rounded-full bg-emerald-400/80" aria-hidden />
+              </div>
+              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/55">{project.category}</span>
+            </div>
+            <div className="absolute inset-x-4 bottom-5 top-12 rounded-b-xl border border-white/10 bg-black/20 p-4 backdrop-blur-sm">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">preview</p>
+              <p className="mt-2 text-lg font-semibold text-white">{project.name}</p>
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                {[0, 1, 2].map((item) => (
+                  <div key={item} className="h-16 rounded-md border border-white/8 bg-white/5" />
+                ))}
+              </div>
+            </div>
+          </>
         )}
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent"
-          aria-hidden
-        />
-        <div className="relative flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-red-400/80" aria-hidden />
-            <span className="size-2.5 rounded-full bg-yellow-400/80" aria-hidden />
-            <span className="size-2.5 rounded-full bg-emerald-400/80" aria-hidden />
-          </div>
-          <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80">
-            {project.category}
-          </span>
-        </div>
-        <div className="relative mt-5 flex min-h-24 items-end justify-between gap-4 rounded-xl border border-white/10 bg-black/15 p-3 backdrop-blur-sm">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
-              preview
-            </p>
-            <p className="mt-2 text-lg font-semibold text-white">{project.name}</p>
-          </div>
-          <span className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white/75">
-            {project.status}
-          </span>
-        </div>
+        <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/35 to-transparent" aria-hidden />
+        <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/60 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
+          {project.status}
+        </span>
       </div>
 
       <div className="flex flex-1 flex-col p-5">

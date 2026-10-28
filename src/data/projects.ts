@@ -59,10 +59,17 @@ export const projects: Project[] = [
   {
     slug: "fun-n-fairy-land",
     name: "Fun 'n' Fairy Land",
-    image: "/projects/preview-placeholder.svg",
+    image: "/projects/Fairyland/Dashboard.png",
     description:
       "An interactive and whimsical web experience designed to showcase enchanting narratives, vibrant illustrations, and creative storytelling.",
     category: "Web",
+    screenshots: [
+      { src: "/projects/Fairyland/Dashboard.png", alt: "Dashboard" },
+      { src: "/projects/Fairyland/Expert.png", alt: "Expert" },
+      { src: "/projects/Fairyland/Images.png", alt: "Images" },
+      { src: "/projects/Fairyland/Map.png", alt: "Map" },
+      { src: "/projects/Fairyland/Outlets.png", alt: "Outlets" },
+    ],
     tech: ["HTML", "CSS", "JavaScript"],
     status: "Completed",
     github: "https://github.com/DevWithSiddharth/Fairyland",
@@ -90,6 +97,10 @@ export const projects: Project[] = [
     category: "Web",
     screenshots: [
       { src: "/projects/TimeReaper/Dashboard.png", alt: "TimeReaper dashboard" },
+      { src: "/projects/TimeReaper/Dashboard 2.png", alt: "TimeReaper dashboard insights", fit: "contain" },
+      { src: "/projects/TimeReaper/Data.png", alt: "TimeReaper data log", fit: "contain" },
+      { src: "/projects/TimeReaper/Graph.png", alt: "TimeReaper analytics graph", fit: "contain" },
+      { src: "/projects/TimeReaper/Recent Days.png", alt: "TimeReaper recent days report", fit: "contain" },
     ],
     tech: ["React", "TypeScript", "Tailwind CSS", "Recharts"],
     status: "Completed",
@@ -99,12 +110,15 @@ export const projects: Project[] = [
   {
     slug: "taskreaper",
     name: "TaskReaper",
-    image: "/projects/preview-placeholder.svg",
+    image: "/projects/TaskReaper/Dashboard.png",
     description:
       "A clean, responsive task planner application featuring persistent storage, flexible filtering, keyboard shortcuts, and full inline editing capabilities.",
     category: "Web",
     tech: ["React", "Vite", "Tailwind CSS"],
     status: "Completed",
+    screenshots: [
+      { src: "/projects/TaskReaper/Dashboard.png", alt: "TaskReaper dashboard" }
+    ],
     github: "https://github.com/DevWithSiddharth/TaskReaper",
     demo: "https://task-reaper-ten.vercel.app",
   }

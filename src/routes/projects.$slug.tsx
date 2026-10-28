@@ -82,7 +82,7 @@ function ProjectDetail() {
                   </span>
                 )}
               </div>
-              <h1 className="mt-3 truncate text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              <h1 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 {p.name}
               </h1>
             </div>
@@ -126,41 +126,90 @@ function ProjectDetail() {
                     {String(screenshots.length).padStart(2, "0")} {screenshots.length === 1 ? "image" : "images"}
                   </span>
                 </div>
-                <div
-                  className={`gap-3 ${
-                    screenshots.length === 1
-                      ? "columns-1"
-                      : screenshots.length <= 4
-                        ? "columns-1 sm:columns-2"
-                        : "columns-1 sm:columns-2 xl:columns-3"
-                  }`}
-                >
-                  {screenshots.map((screenshot, index) => (
-                    <ScrollReveal key={screenshot.src} className="mb-3 break-inside-avoid">
-                      <button
-                        type="button"
-                        onClick={() => setZoomedScreenshot(screenshot)}
-                        aria-label={`Zoom image: ${screenshot.alt}`}
-                        className="group relative block w-full overflow-hidden rounded-xl border border-border bg-background p-1.5 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      >
-                        <img
-                          src={screenshot.src}
-                          alt={screenshot.alt}
-                          style={{ objectPosition: screenshot.position }}
-                          className={`w-full rounded-lg transition-transform duration-500 group-hover:scale-[1.025] ${
-                            screenshot.fit === "cover"
-                              ? "aspect-[16/10] object-cover"
-                              : "h-auto max-h-[70vh] object-contain"
-                          }`}
-                          loading={index === 0 ? "eager" : "lazy"}
-                        />
-                        <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
-                          {String(index + 1).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}
-                        </span>
-                      </button>
-                    </ScrollReveal>
-                  ))}
-                </div>
+                {(() => {
+                  const hero = screenshots.find((screenshot) => screenshot.src === p.image) ?? screenshots[0];
+                  const gallery = screenshots.filter((screenshot) => screenshot.src !== hero?.src);
+                  const rightImages = gallery.slice(0, 2);
+                  const bottomImages = gallery.slice(2);
+
+                  return (
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-12 sm:items-start">
+                      {hero && (
+                        <ScrollReveal className="sm:col-span-8">
+                          <button
+                            type="button"
+                            onClick={() => setZoomedScreenshot(hero)}
+                            aria-label={`Zoom image: ${hero.alt}`}
+                            className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-[#090d18] p-1.5 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          >
+                            <img
+                              src={hero.src}
+                              alt={hero.alt}
+                              style={{ objectPosition: hero.position }}
+                              className="size-full rounded-lg object-contain transition-transform duration-500 group-hover:scale-[1.015]"
+                              loading="eager"
+                            />
+                            <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
+                              01 / {String(screenshots.length).padStart(2, "0")}
+                            </span>
+                          </button>
+                        </ScrollReveal>
+                      )}
+
+                      {rightImages.length > 0 && (
+                        <div className="grid gap-3 sm:col-span-4">
+                          {rightImages.map((screenshot, index) => (
+                            <ScrollReveal key={screenshot.src}>
+                              <button
+                                type="button"
+                                onClick={() => setZoomedScreenshot(screenshot)}
+                                aria-label={`Zoom image: ${screenshot.alt}`}
+                                className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-[#090d18] p-1.5 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                              >
+                                <img
+                                  src={screenshot.src}
+                                  alt={screenshot.alt}
+                                  style={{ objectPosition: screenshot.position }}
+                                  className="size-full rounded-lg object-contain transition-transform duration-500 group-hover:scale-[1.015]"
+                                  loading="lazy"
+                                />
+                                <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
+                                  {String(index + 2).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}
+                                </span>
+                              </button>
+                            </ScrollReveal>
+                          ))}
+                        </div>
+                      )}
+
+                      {bottomImages.length > 0 && (
+                        <div className="grid grid-cols-1 gap-3 sm:col-span-12 sm:grid-cols-2">
+                          {bottomImages.map((screenshot, index) => (
+                            <ScrollReveal key={screenshot.src}>
+                              <button
+                                type="button"
+                                onClick={() => setZoomedScreenshot(screenshot)}
+                                aria-label={`Zoom image: ${screenshot.alt}`}
+                                className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-[#090d18] p-1.5 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                              >
+                                <img
+                                  src={screenshot.src}
+                                  alt={screenshot.alt}
+                                  style={{ objectPosition: screenshot.position }}
+                                  className="size-full rounded-lg object-contain transition-transform duration-500 group-hover:scale-[1.015]"
+                                  loading="lazy"
+                                />
+                                <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
+                                  {String(index + rightImages.length + 2).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}
+                                </span>
+                              </button>
+                            </ScrollReveal>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </section>
