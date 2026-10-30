@@ -24,12 +24,13 @@ export const Route = createFileRoute("/projects/$slug")({
   },
   head: ({ loaderData }) =>
     loaderData
-      ? seo(loaderData.project.name, loaderData.project.description, `/projects/${loaderData.project.slug}`)
+      ? seo(
+          loaderData.project.name,
+          loaderData.project.description,
+          `/projects/${loaderData.project.slug}`,
+        )
       : {
-          meta: [
-            { title: "Project not found" },
-            { name: "robots", content: "noindex" },
-          ],
+          meta: [{ title: "Project not found" }, { name: "robots", content: "noindex" }],
         },
   component: ProjectDetail,
 });
@@ -50,13 +51,21 @@ function ProjectDetail() {
         !p.screenshots?.some((screenshot) => screenshot.src === p.image)
           ? [{ src: p.image, alt: p.imageAlt ?? `${p.name} project screenshot` }]
           : []),
-        ...(p.screenshots ?? []).filter((screenshot) => screenshot.src !== "/projects/preview-placeholder.svg"),
+        ...(p.screenshots ?? []).filter(
+          (screenshot) => screenshot.src !== "/projects/preview-placeholder.svg",
+        ),
       ];
 
   return (
     <Container className="max-w-6xl py-8 md:py-12">
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link to="/projects" className="inline-flex items-center gap-2 transition-colors hover:text-foreground">
+      <nav
+        aria-label="Breadcrumb"
+        className="flex items-center gap-2 text-sm text-muted-foreground"
+      >
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
+        >
           <ArrowLeft className="size-4" />
           Projects
         </Link>
@@ -110,12 +119,19 @@ function ProjectDetail() {
 
         <div className="grid lg:grid-cols-[minmax(0,1fr)_300px]">
           <section className="min-w-0 space-y-6 p-5 sm:p-7" aria-label="Project content">
-            <section className="rounded-xl border border-border bg-background p-5 sm:p-6" aria-labelledby="project-description">
+            <section
+              className="rounded-xl border border-border bg-background p-5 sm:p-6"
+              aria-labelledby="project-description"
+            >
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Layers3 className="size-4 text-primary" aria-hidden />
-                <h2 id="project-description" className="text-sm font-semibold text-foreground">Description</h2>
+                <h2 id="project-description" className="text-sm font-semibold text-foreground">
+                  Description
+                </h2>
               </div>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">{p.description}</p>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+                {p.description}
+              </p>
             </section>
 
             {screenshots.length > 0 && (
@@ -123,11 +139,13 @@ function ProjectDetail() {
                 <div className="mb-3 flex items-center justify-between">
                   <h2 className="text-sm font-semibold text-foreground">Preview</h2>
                   <span className="font-mono text-xs text-muted-foreground">
-                    {String(screenshots.length).padStart(2, "0")} {screenshots.length === 1 ? "image" : "images"}
+                    {String(screenshots.length).padStart(2, "0")}{" "}
+                    {screenshots.length === 1 ? "image" : "images"}
                   </span>
                 </div>
                 {(() => {
-                  const hero = screenshots.find((screenshot) => screenshot.src === p.image) ?? screenshots[0];
+                  const hero =
+                    screenshots.find((screenshot) => screenshot.src === p.image) ?? screenshots[0];
                   const gallery = screenshots.filter((screenshot) => screenshot.src !== hero?.src);
                   const rightImages = gallery.slice(0, 2);
                   const bottomImages = gallery.slice(2);
@@ -174,7 +192,8 @@ function ProjectDetail() {
                                   loading="lazy"
                                 />
                                 <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
-                                  {String(index + 2).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}
+                                  {String(index + 2).padStart(2, "0")} /{" "}
+                                  {String(screenshots.length).padStart(2, "0")}
                                 </span>
                               </button>
                             </ScrollReveal>
@@ -200,7 +219,8 @@ function ProjectDetail() {
                                   loading="lazy"
                                 />
                                 <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/65 px-2.5 py-1 font-mono text-[10px] text-white/90 backdrop-blur-sm">
-                                  {String(index + rightImages.length + 2).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}
+                                  {String(index + rightImages.length + 2).padStart(2, "0")} /{" "}
+                                  {String(screenshots.length).padStart(2, "0")}
                                 </span>
                               </button>
                             </ScrollReveal>
@@ -218,12 +238,16 @@ function ProjectDetail() {
             <section aria-labelledby="project-details">
               <div className="mb-3 flex items-center gap-2">
                 <Monitor className="size-4 text-primary" aria-hidden />
-                <h2 id="project-details" className="text-sm font-semibold text-foreground">Project details</h2>
+                <h2 id="project-details" className="text-sm font-semibold text-foreground">
+                  Project details
+                </h2>
               </div>
               <dl className="overflow-hidden rounded-xl border border-border bg-card">
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 text-sm">
                   <dt className="text-muted-foreground">Status</dt>
-                  <dd><StatusBadge status={p.status} /></dd>
+                  <dd>
+                    <StatusBadge status={p.status} />
+                  </dd>
                 </div>
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 text-sm">
                   <dt className="text-muted-foreground">Category</dt>
@@ -231,7 +255,9 @@ function ProjectDetail() {
                 </div>
                 <div className="flex items-center justify-between gap-3 px-4 py-3 text-sm">
                   <dt className="text-muted-foreground">Links</dt>
-                  <dd className="font-medium text-foreground">{[p.demo, p.github].filter(Boolean).length} available</dd>
+                  <dd className="font-medium text-foreground">
+                    {[p.demo, p.github].filter(Boolean).length} available
+                  </dd>
                 </div>
               </dl>
             </section>
@@ -240,13 +266,18 @@ function ProjectDetail() {
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Boxes className="size-4 text-primary" aria-hidden />
-                  <h2 id="project-stack" className="text-sm font-semibold text-foreground">Technology stack</h2>
+                  <h2 id="project-stack" className="text-sm font-semibold text-foreground">
+                    Technology stack
+                  </h2>
                 </div>
                 <span className="font-mono text-[11px] text-muted-foreground">{p.tech.length}</span>
               </div>
               <ul className="space-y-2">
                 {p.tech.map((tech, index) => (
-                  <li key={tech} className="flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5">
+                  <li
+                    key={tech}
+                    className="flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5"
+                  >
                     <span className="flex size-7 items-center justify-center rounded-md bg-primary/10 font-mono text-[10px] text-primary">
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -258,15 +289,23 @@ function ProjectDetail() {
 
             {(p.demo || p.github) && (
               <section className="rounded-xl border border-border bg-card p-4">
-                <p className="text-xs leading-5 text-muted-foreground">Want to explore the code or try the project?</p>
+                <p className="text-xs leading-5 text-muted-foreground">
+                  Want to explore the code or try the project?
+                </p>
                 <div className="mt-3 flex flex-wrap gap-3 text-xs font-medium">
                   {p.demo && (
-                    <ExternalLink href={p.demo} className="inline-flex items-center gap-1.5 text-primary hover:underline">
+                    <ExternalLink
+                      href={p.demo}
+                      className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    >
                       Open live site <ExternalLinkIcon className="size-3" />
                     </ExternalLink>
                   )}
                   {p.github && (
-                    <ExternalLink href={p.github} className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground">
+                    <ExternalLink
+                      href={p.github}
+                      className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+                    >
                       Source code <Github className="size-3" />
                     </ExternalLink>
                   )}
@@ -287,7 +326,9 @@ function ProjectDetail() {
           {zoomedScreenshot && (
             <>
               <DialogTitle className="sr-only">{zoomedScreenshot.alt}</DialogTitle>
-              <DialogDescription className="sr-only">Enlarged project screenshot. Press Escape to close.</DialogDescription>
+              <DialogDescription className="sr-only">
+                Enlarged project screenshot. Press Escape to close.
+              </DialogDescription>
               <img
                 src={zoomedScreenshot.src}
                 alt={zoomedScreenshot.alt}

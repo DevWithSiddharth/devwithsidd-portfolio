@@ -30,17 +30,25 @@ export function ProjectCard({ project }: { project: Project }) {
           />
         ) : (
           <>
-            <div className="absolute inset-0 opacity-95" style={{ background: accent }} aria-hidden />
+            <div
+              className="absolute inset-0 opacity-95"
+              style={{ background: accent }}
+              aria-hidden
+            />
             <div className="absolute inset-x-4 top-4 flex h-8 items-center justify-between rounded-t-lg border border-white/10 bg-black/25 px-3">
               <div className="flex items-center gap-1.5">
                 <span className="size-2 rounded-full bg-red-400/80" aria-hidden />
                 <span className="size-2 rounded-full bg-yellow-400/80" aria-hidden />
                 <span className="size-2 rounded-full bg-emerald-400/80" aria-hidden />
               </div>
-              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/55">{project.category}</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/55">
+                {project.category}
+              </span>
             </div>
             <div className="absolute inset-x-4 bottom-5 top-12 rounded-b-xl border border-white/10 bg-black/20 p-4 backdrop-blur-sm">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">preview</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
+                preview
+              </p>
               <p className="mt-2 text-lg font-semibold text-white">{project.name}</p>
               <div className="mt-4 grid grid-cols-3 gap-2">
                 {[0, 1, 2].map((item) => (
@@ -50,7 +58,10 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
           </>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/35 to-transparent" aria-hidden />
+        <div
+          className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/35 to-transparent"
+          aria-hidden
+        />
         <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-black/60 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
           {project.status}
         </span>

@@ -3,24 +3,23 @@ export type Project = {
   slug: string;
   name: string;
   description: string;
-  /** Set to null or omit to use the card's abstract fallback instead. */
+
   image?: string | null;
   imageAlt?: string;
-  /** Optional gallery images; use fit="cover" with position to crop around a focal point. */
+
   screenshots?: { src: string; alt: string; fit?: "cover" | "contain"; position?: string }[];
   category: "Web" | "Backend" | "Python" | "AI/ML" | "Tools";
   tech: string[];
   status: ProjectStatus;
   featured?: boolean;
-  /** true = sample entry, shown with a clear "placeholder" label */
+
   placeholder?: boolean;
   github?: string;
   demo?: string;
 };
 
-// Add your real projects here. Remove the placeholder entry once you have real ones.
 export const projects: Project[] = [
-{
+  {
     slug: "developer-portfolio",
     name: "Developer Portfolio",
     image: "/projects/preview-placeholder.svg",
@@ -36,7 +35,14 @@ export const projects: Project[] = [
   {
     slug: "python-snake-game",
     name: "Python Snake Game",
-    image: "/projects/preview-placeholder.svg",
+    image: "/projects/Snake Game/Dashboard.png",
+    screenshots: [
+      { src: "/projects/Snake Game/Dashboard.png", alt: "Dashboard" },
+      { src: "/projects/Snake Game/Clasic.png", alt: "clasic" },
+      { src: "/projects/Snake Game/blocks.png", alt: "block" },
+      { src: "/projects/Snake Game/Island.png", alt: "Island" },
+      { src: "/projects/Snake Game/over.png", alt: "Game Over" },
+    ],
     description:
       "A classic, fast-paced Snake arcade game built using Python and Pygame featuring responsive controls, multiple maps, and dynamic speed scaling.",
     category: "Python",
@@ -48,7 +54,11 @@ export const projects: Project[] = [
   {
     slug: "color-catcher",
     name: "Color Catcher",
-    image: "/projects/preview-placeholder.svg",
+    image: "/projects/Color Catcher/Dashboard.png",
+    screenshots: [
+      { src: "/projects/Color Catcher/Dashboard.png", alt: "Dashboard" },
+      { src: "/projects/Color Catcher/over.png", alt: "Game Over" },
+    ],
     description:
       "A fast-paced neon arcade game built with Pygame featuring auto-detecting input modes, dynamic difficulty scaling, and rich visual juice effects.",
     category: "Python",
@@ -78,8 +88,16 @@ export const projects: Project[] = [
   {
     slug: "getmusic",
     name: "GetMusic",
-    image: "/projects/preview-placeholder.svg",
+    image: "/projects/GetMusic/Dashboard.png",
     featured: true,
+    screenshots: [
+      { src: "/projects/GetMusic/Dashboard.png", alt: "GetMusic dashboard" },
+      { src: "/projects/GetMusic/Album.png", alt: "GetMusic album" },
+      { src: "/projects/GetMusic/login.png", alt: "GetMusic login" },
+      { src: "/projects/GetMusic/playlist.png", alt: "GetMusic playlist" },
+      { src: "/projects/GetMusic/set.png", alt: "GetMusic settings" },
+      { src: "/projects/GetMusic/set2.png", alt: "GetMusic settings" },
+    ],
     description:
       "A sleek dark-themed music streaming platform with playlist creation, discovery features, and a comprehensive administrator dashboard.",
     category: "Backend",
@@ -97,10 +115,18 @@ export const projects: Project[] = [
     category: "Web",
     screenshots: [
       { src: "/projects/TimeReaper/Dashboard.png", alt: "TimeReaper dashboard" },
-      { src: "/projects/TimeReaper/Dashboard 2.png", alt: "TimeReaper dashboard insights", fit: "contain" },
+      {
+        src: "/projects/TimeReaper/Dashboard 2.png",
+        alt: "TimeReaper dashboard insights",
+        fit: "contain",
+      },
       { src: "/projects/TimeReaper/Data.png", alt: "TimeReaper data log", fit: "contain" },
       { src: "/projects/TimeReaper/Graph.png", alt: "TimeReaper analytics graph", fit: "contain" },
-      { src: "/projects/TimeReaper/Recent Days.png", alt: "TimeReaper recent days report", fit: "contain" },
+      {
+        src: "/projects/TimeReaper/Recent Days.png",
+        alt: "TimeReaper recent days report",
+        fit: "contain",
+      },
     ],
     tech: ["React", "TypeScript", "Tailwind CSS", "Recharts"],
     status: "Completed",
@@ -116,12 +142,10 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Vite", "Tailwind CSS"],
     status: "Completed",
-    screenshots: [
-      { src: "/projects/TaskReaper/Dashboard.png", alt: "TaskReaper dashboard" }
-    ],
+    screenshots: [{ src: "/projects/TaskReaper/Dashboard.png", alt: "TaskReaper dashboard" }],
     github: "https://github.com/DevWithSiddharth/TaskReaper",
     demo: "https://task-reaper-ten.vercel.app",
-  }
+  },
 ];
 
 export const projectCategories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];

@@ -1,4 +1,3 @@
-// Single source of truth for personal info. Edit here only.
 export const profile = {
   name: "Siddharth Yadav",
   handle: "DevWithSiddharth",
@@ -57,7 +56,6 @@ export const profile = {
   socials: [
     { label: "GitHub", url: "https://github.com/DevWithSiddharth" },
     { label: "Linkedin", url: "https://www.linkedin.com/in/devwithsidd/" },
-    // Add LinkedIn and other profiles when ready.
   ],
 
   github: "https://github.com/DevWithSiddharth",

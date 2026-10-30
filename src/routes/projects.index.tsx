@@ -12,7 +12,7 @@ export const Route = createFileRoute("/projects/")({
     seo(
       "Projects",
       "Projects by Siddharth Yadav — completed work, works in progress and experiments.",
-      "/projects"
+      "/projects",
     ),
   component: Projects,
 });
@@ -31,18 +31,13 @@ function Projects() {
 
   return (
     <>
-      <PageHeader
-        label="projects"
-        title="Projects"
-      >
+      <PageHeader label="projects" title="Projects">
         Real work, works in progress and experiments — each clearly labelled.
       </PageHeader>
 
       <Container className="py-10 md:py-14">
-        {/* Filter Controls Container */}
         <div className="space-y-4 rounded-[1.5rem] border border-border/60 bg-card/40 p-4 shadow-card backdrop-blur-sm sm:p-5">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            {/* Search Input */}
             <div className="relative flex-1">
               <Search
                 className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-foreground"
@@ -71,7 +66,6 @@ function Projects() {
               )}
             </div>
 
-            {/* Category Filter Pills */}
             <div
               className="flex flex-wrap items-center gap-1.5"
               role="group"
@@ -107,10 +101,10 @@ function Projects() {
             </div>
           </div>
 
-          {/* Results Summary Bar */}
           <div className="flex items-center justify-between border-t border-border/40 pt-3 text-xs text-muted-foreground">
             <p className="font-mono" aria-live="polite">
-              Showing <span className="font-semibold text-foreground">{list.length}</span> {list.length === 1 ? "project" : "projects"}
+              Showing <span className="font-semibold text-foreground">{list.length}</span>{" "}
+              {list.length === 1 ? "project" : "projects"}
             </p>
             {isFiltered && (
               <p className="hidden font-mono text-[11px] text-muted-foreground/70 sm:block">
@@ -120,7 +114,6 @@ function Projects() {
           </div>
         </div>
 
-        {/* Project Grid / Empty State */}
         {list.length > 0 ? (
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((p) => (

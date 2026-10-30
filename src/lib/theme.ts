@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export type Theme = "dark" | "light";
 const KEY = "theme";
 
-// Inline script runs before paint to avoid a flash of the wrong theme.
 export const themeInitScript = `(function(){try{var t=localStorage.getItem('${KEY}');document.documentElement.classList.toggle('dark',t!=='light');}catch(e){}})();`;
 
 export function useTheme() {
@@ -16,7 +15,9 @@ export function useTheme() {
     document.documentElement.classList.toggle("dark", next === "dark");
     try {
       localStorage.setItem(KEY, next);
-    } catch {}
+    } catch {
+      setTheme(next);
+    }
     setTheme(next);
   };
   return { theme, toggle };

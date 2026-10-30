@@ -1,58 +1,114 @@
 export type LearningStatus = "Exploring" | "Studying" | "Completed";
 
+export type LearningCategory = "Frontend" | "Backend" | "Data & AI" | "DevOps & Cloud";
+
 export type LearningEntry = {
+  readonly id: string;
   readonly topic: string;
   readonly status: LearningStatus;
-  readonly description?: string;
+  readonly category: LearningCategory;
+  readonly description: string;
+  readonly tags: readonly string[];
   readonly date?: string;
-  readonly relatedProject?: string; // project slug
+  readonly relatedProject?: string;
 };
 
-// Only add real milestones. Dates are optional.
 export const learning: readonly LearningEntry[] = [
   {
+    id: "web-dev-react",
     topic: "Web Development & React",
     status: "Completed",
-    description: "HTML, CSS, JavaScript, and React — building responsive interfaces that actually work.",
+    category: "Frontend",
+    description:
+      "HTML, CSS, JavaScript, and React — building responsive, accessible interfaces that actually work.",
+    tags: ["React", "JavaScript", "HTML/CSS", "UI/UX"],
     date: "2018",
     relatedProject: "developer-portfolio",
   },
   {
+    id: "python-data",
     topic: "Python & Data Handling",
     status: "Completed",
-    description: "Scripting, data manipulation with Pandas, and writing cleaner code.",
+    category: "Data & AI",
+    description:
+      "Scripting, data manipulation with Pandas, and writing clean, maintainable pythonic code.",
+    tags: ["Python", "Pandas", "Automation", "Scripting"],
     date: "2020",
   },
   {
-    topic: "TypeScript & Advanced Frontend",
+    id: "typescript-frontend",
+    topic: "MERN Stack & Advanced Frontend",
     status: "Studying",
-    description: "Type safety, Next.js App Router, and scaling component architecture.",
-    date: "2026",
+    category: "Frontend",
+    description:
+      "Strict type safety, Next.js App Router, TanStack ecosystem, and scaling component architecture.",
+    tags: ["Next.js", "TanStack Router", "Tailwind CSS"],
+    date: "2024",
   },
   {
+    id: "backend-apis",
     topic: "Backend, APIs & Databases",
     status: "Studying",
-    description: "Flask, FastAPI, PostgreSQL, and Node.js — how requests, routes, and data fit together.",
+    category: "Backend",
+    description:
+      "Flask, FastAPI, PostgreSQL, and Node.js — how requests, routes, ORMs, and data fit together.",
+    tags: ["FastAPI", "PostgreSQL", "Node.js", "REST APIs"],
     date: "2026",
   },
   {
+    id: "devops-containerization",
     topic: "DevOps & Containerization",
     status: "Exploring",
-    description: "Docker, Linux environments, and setting up automated CI/CD pipelines.",
+    category: "DevOps & Cloud",
+    description: "Docker, Linux server management, and setting up automated CI/CD pipelines.",
+    tags: ["Docker", "Linux", "CI/CD", "GitHub Actions"],
   },
   {
+    id: "ai-llm-orchestration",
     topic: "AI Agents & LLM Orchestration",
     status: "Exploring",
-    description: "LangChain, PyTorch fundamentals, and occasionally wondering what I'm doing 😅.",
+    category: "Data & AI",
+    description:
+      "LangChain, PyTorch fundamentals, tool calling, and structured prompt engineering.",
+    tags: ["LangChain", "PyTorch", "LLMs", "AI Agents"],
   },
 ];
-
-// --- Helper Utilities ---
 
 export const getLearningByStatus = (status: LearningStatus): readonly LearningEntry[] => {
   return learning.filter((entry) => entry.status === status);
 };
 
+export const getLearningByCategory = (category: LearningCategory): readonly LearningEntry[] => {
+  return learning.filter((entry) => entry.category === category);
+};
+
+export const searchLearning = (query: string): readonly LearningEntry[] => {
+  const normalizedQuery = query.toLowerCase().trim();
+  if (!normalizedQuery) return learning;
+
+  return learning.filter(
+    (entry) =>
+      entry.topic.toLowerCase().includes(normalizedQuery) ||
+      entry.description.toLowerCase().includes(normalizedQuery) ||
+      entry.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery)),
+  );
+};
+
 export const activeStudiesCount: number = learning.filter(
-  (entry) => entry.status === "Studying" || entry.status === "Exploring"
+  (entry) => entry.status === "Studying" || entry.status === "Exploring",
 ).length;
+
+export const getLearningStats = () => {
+  const total = learning.length;
+  const completed = learning.filter((item) => item.status === "Completed").length;
+  const studying = learning.filter((item) => item.status === "Studying").length;
+  const exploring = learning.filter((item) => item.status === "Exploring").length;
+
+  return {
+    total,
+    completed,
+    studying,
+    exploring,
+    completionPercentage: total > 0 ? Math.round((completed / total) * 100) : 0,
+  };
+};

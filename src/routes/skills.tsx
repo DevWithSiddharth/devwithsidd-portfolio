@@ -5,7 +5,12 @@ import { Container, PageHeader, StatusBadge } from "@/components/common/ui";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/skills")({
-  head: () => seo("Skills", "Languages, frameworks and tools Siddharth Yadav works with, labelled honestly.", "/skills"),
+  head: () =>
+    seo(
+      "Skills",
+      "Languages, frameworks and tools Siddharth Yadav works with, labelled honestly.",
+      "/skills",
+    ),
   component: Skills,
 });
 
@@ -14,7 +19,10 @@ function Skills() {
   const groups = cat === "All" ? skillGroups : skillGroups.filter((g) => g.category === cat);
   return (
     <>
-      <PageHeader label="skills" title="Skills & tools">Labels are honest: <em>Learning</em>, <em>Comfortable</em> or <em>Proficient</em>. No made-up percentages.</PageHeader>
+      <PageHeader label="skills" title="Skills & tools">
+        Labels are honest: <em>Learning</em>, <em>Comfortable</em> or <em>Proficient</em>. No
+        made-up percentages.
+      </PageHeader>
       <Container className="py-12">
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter skills">
           {["All", ...skillGroups.map((g) => g.category)].map((c) => (
@@ -34,7 +42,10 @@ function Skills() {
               <h2 className="font-mono text-sm text-primary">{g.category}</h2>
               <ul className="mt-4 divide-y divide-border/80">
                 {g.skills.map((s) => (
-                  <li key={s.name} className="flex items-center justify-between py-3"><span className="font-medium">{s.name}</span><StatusBadge status={s.level} /></li>
+                  <li key={s.name} className="flex items-center justify-between py-3">
+                    <span className="font-medium">{s.name}</span>
+                    <StatusBadge status={s.level} />
+                  </li>
                 ))}
               </ul>
             </section>

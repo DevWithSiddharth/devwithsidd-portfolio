@@ -11,14 +11,12 @@ export interface SkillGroup {
   readonly skills: readonly Skill[];
 }
 
-// Define the hierarchy order for sorting (index 0 comes first)
 const levelOrder: Record<Level, number> = {
   Proficient: 0,
   Comfortable: 1,
   Learning: 2,
 };
 
-// Raw definitions (can be added in any order; they will auto-sort)
 const rawSkillGroups: SkillGroup[] = [
   {
     category: "Languages",
@@ -40,7 +38,7 @@ const rawSkillGroups: SkillGroup[] = [
       { name: "Bootstrap", level: "Proficient" },
       { name: "Figma", level: "Proficient" },
       { name: "React", level: "Comfortable" },
-      { name: "Next.js", level: "Learning" }
+      { name: "Next.js", level: "Learning" },
     ],
   },
   {
@@ -51,7 +49,7 @@ const rawSkillGroups: SkillGroup[] = [
       { name: "MongoDB", level: "Comfortable" },
       { name: "Node.js", level: "Learning" },
       { name: "Express", level: "Learning" },
-      { name: "FastAPI", level: "Learning" }
+      { name: "FastAPI", level: "Learning" },
     ],
   },
   {
@@ -71,34 +69,31 @@ const rawSkillGroups: SkillGroup[] = [
       { name: "GitHub", level: "Proficient" },
       { name: "Linux", level: "Comfortable" },
       { name: "Docker", level: "Learning" },
-      { name: "Bash / Shell", level: "Proficient" }
+      { name: "Bash / Shell", level: "Proficient" },
     ],
   },
 ];
 
-// Automatically sort skills within each group by level order (Proficient -> Comfortable -> Learning)
 export const skillGroups: readonly SkillGroup[] = rawSkillGroups.map((group) => ({
   ...group,
-  skills: [...group.skills].sort(
-    (a, b) => levelOrder[a.level] - levelOrder[b.level]
-  ),
+  skills: [...group.skills].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]),
 }));
 
-// Unique derived list of all skill names
 export const allSkills: readonly string[] = Array.from(
-  new Set(skillGroups.flatMap((g) => g.skills.map((s) => s.name)))
+  new Set(skillGroups.flatMap((g) => g.skills.map((s) => s.name))),
 );
 
-// Helper utilities with deduplication
 export const getSkillsByLevel = (level: Level): Skill[] => {
   const seen = new Set<string>();
-  return skillGroups.flatMap((g) => g.skills).filter((s) => {
-    if (s.level === level && !seen.has(s.name)) {
-      seen.add(s.name);
-      return true;
-    }
-    return false;
-  });
+  return skillGroups
+    .flatMap((g) => g.skills)
+    .filter((s) => {
+      if (s.level === level && !seen.has(s.name)) {
+        seen.add(s.name);
+        return true;
+      }
+      return false;
+    });
 };
 
 export const totalSkillCount: number = allSkills.length;

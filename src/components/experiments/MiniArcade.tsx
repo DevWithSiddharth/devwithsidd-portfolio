@@ -83,7 +83,11 @@ export function MemoryMatch() {
               ? `Those cards don't match — try another pair. · ${moves} moves`
               : `${matched.length / 2} / ${symbols.length} pairs · ${moves} moves`}
         </p>
-        <button type="button" onClick={reset} className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm hover:border-primary">
+        <button
+          type="button"
+          onClick={reset}
+          className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm hover:border-primary"
+        >
           <RotateCcw className="size-4" /> New game
         </button>
       </div>
@@ -94,7 +98,9 @@ export function MemoryMatch() {
             <button
               key={card.id}
               type="button"
-              aria-label={revealed ? `Card ${card.id + 1}: ${card.symbol}` : `Reveal card ${card.id + 1}`}
+              aria-label={
+                revealed ? `Card ${card.id + 1}: ${card.symbol}` : `Reveal card ${card.id + 1}`
+              }
               aria-pressed={revealed}
               disabled={locked || revealed}
               onClick={() => chooseCard(card)}
@@ -122,10 +128,13 @@ function ReactionTest() {
 
   useEffect(() => {
     if (phase !== "waiting") return;
-    const timeout = window.setTimeout(() => {
-      startedAt.current = performance.now();
-      setPhase("ready");
-    }, 1400 + Math.random() * 1800);
+    const timeout = window.setTimeout(
+      () => {
+        startedAt.current = performance.now();
+        setPhase("ready");
+      },
+      1400 + Math.random() * 1800,
+    );
     return () => window.clearTimeout(timeout);
   }, [phase]);
 
@@ -152,7 +161,8 @@ function ReactionTest() {
   return (
     <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
       <p className="text-sm leading-6 text-muted-foreground" aria-live="polite">
-        {phase === "idle" && "Press start, wait for the panel to turn green, then click as quickly as you can."}
+        {phase === "idle" &&
+          "Press start, wait for the panel to turn green, then click as quickly as you can."}
         {phase === "waiting" && "Stay ready… don’t click until it turns green."}
         {phase === "ready" && "Go! Click the green panel now."}
         {phase === "result" && `Your reaction time was ${result} milliseconds.`}
@@ -212,9 +222,13 @@ function NumberGuess() {
 
   return (
     <div>
-      <p className="text-sm text-muted-foreground" aria-live="polite">{message}</p>
+      <p className="text-sm text-muted-foreground" aria-live="polite">
+        {message}
+      </p>
       <form onSubmit={submitGuess} className="mt-4 flex flex-wrap gap-2">
-        <label htmlFor="number-guess" className="sr-only">Guess a number from 1 to 100</label>
+        <label htmlFor="number-guess" className="sr-only">
+          Guess a number from 1 to 100
+        </label>
         <input
           id="number-guess"
           type="number"
@@ -227,10 +241,18 @@ function NumberGuess() {
           className="min-w-0 flex-1 rounded-xl border border-input bg-background px-3 py-2 text-sm"
           placeholder="Your guess (1–100)"
         />
-        <button type="submit" disabled={complete} className="rounded-xl bg-gradient-accent px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-50">
+        <button
+          type="submit"
+          disabled={complete}
+          className="rounded-xl bg-gradient-accent px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-50"
+        >
           Guess
         </button>
-        <button type="button" onClick={reset} className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm hover:border-primary">
+        <button
+          type="button"
+          onClick={reset}
+          className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm hover:border-primary"
+        >
           <RotateCcw className="size-4" /> Restart
         </button>
       </form>
@@ -254,7 +276,9 @@ export function MiniArcade() {
               aria-pressed={game === item}
               onClick={() => setGame(item)}
               className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm transition-colors ${
-                game === item ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground hover:border-primary hover:text-foreground"
+                game === item
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border text-muted-foreground hover:border-primary hover:text-foreground"
               }`}
             >
               <Icon className="size-4" /> {item}
