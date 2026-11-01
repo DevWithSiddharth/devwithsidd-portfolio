@@ -38,6 +38,7 @@ export const profile = {
   email: "devwithsid.tech@gmail.com",
   emailIsPlaceholder: false,
 
+  resumeEnabled: false,
   resumeUrl: null as string | null,
 
   education: [] as {

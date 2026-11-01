@@ -1,20 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { profile } from "@/data/profile";
+import { validateContact, type ContactFields } from "@/lib/contact";
 
-type Fields = { name: string; email: string; subject: string; message: string };
-const empty: Fields = { name: "", email: "", subject: "", message: "" };
-
-export function validateContact(f: Fields) {
-  const e: Partial<Record<keyof Fields, string>> = {};
-  if (f.name.trim().length < 2) e.name = "Please enter your name.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) e.email = "Please enter a valid email.";
-  if (f.subject.trim().length < 3) e.subject = "Please add a short subject.";
-  if (f.message.trim().length < 10) e.message = "Message should be at least 10 characters.";
-  return e;
-}
+const empty: ContactFields = { name: "", email: "", subject: "", message: "" };
 
 export function ContactForm() {
-  const [f, setF] = useState<Fields>(empty);
+  const [f, setF] = useState<ContactFields>(empty);
   const [errors, setErrors] = useState<ReturnType<typeof validateContact>>({});
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "unconfigured">(
     "idle",
@@ -43,7 +34,7 @@ export function ContactForm() {
   };
 
   const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(f.subject)}&body=${encodeURIComponent(`${f.message}\n\n— ${f.name} (${f.email})`)}`;
-  const field = (k: keyof Fields, label: string, type = "text") => (
+  const field = (k: keyof ContactFields, label: string, type = "text") => (
     <div>
       <label htmlFor={k} className="mb-1.5 block text-sm font-medium">
         {label}

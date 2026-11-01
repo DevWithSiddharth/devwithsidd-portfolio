@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Github, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { navigation } from "@/data/navigation";
 import { profile } from "@/data/profile";
 
@@ -31,7 +31,7 @@ export function SiteFooter() {
           >
             Terminal
           </Link>
-          {profile.resumeUrl && (
+          {profile.resumeEnabled && profile.resumeUrl && (
             <a
               href={profile.resumeUrl}
               download
@@ -57,6 +57,15 @@ export function SiteFooter() {
             className="grid size-10 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary hover:text-primary"
           >
             <Mail className="size-4" />
+          </a>
+          <a
+            href={profile.socials.find((social) => social.label === "Linkedin")?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="grid size-10 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <Linkedin className="size-4" />
           </a>
         </div>
       </div>

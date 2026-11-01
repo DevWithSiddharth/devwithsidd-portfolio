@@ -22,7 +22,7 @@ export const projects: Project[] = [
   {
     slug: "developer-portfolio",
     name: "Developer Portfolio",
-    image: "/projects/preview-placeholder.svg",
+    image: "/og-image.svg",
     description:
       "An interactive developer workspace and project showcase featuring an in-browser terminal simulation, case study reader, and modular design.",
     category: "Web",

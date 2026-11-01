@@ -1,14 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Github,
-  Mail,
-  Sparkles,
-  CheckCircle2,
-  Flame,
-  Compass,
-  Code2,
-} from "lucide-react";
+import { ArrowRight, Github, Mail, Flame, Compass, Code2 } from "lucide-react";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { allSkills } from "@/data/skills";

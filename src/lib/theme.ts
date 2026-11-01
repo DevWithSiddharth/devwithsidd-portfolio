@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export type Theme = "dark" | "light";
 const KEY = "theme";
 
-export const themeInitScript = `(function(){try{var t=localStorage.getItem('${KEY}');document.documentElement.classList.toggle('dark',t!=='light');}catch(e){}})();`;
+export const themeInitScript = `(function(){try{var t=localStorage.getItem('${KEY}');var d=t!=='light';document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){}})();`;
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>("dark");
@@ -12,13 +12,31 @@ export function useTheme() {
   }, []);
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
-    document.documentElement.classList.toggle("dark", next === "dark");
-    try {
-      localStorage.setItem(KEY, next);
-    } catch {
+
+    const applyTheme = () => {
+      document.documentElement.classList.toggle("dark", next === "dark");
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem(KEY, next);
+      } catch {
+        setTheme(next);
+        return;
+      }
       setTheme(next);
+    };
+
+    const viewTransitionDocument = document as Document & {
+      startViewTransition?: (callback: () => void) => { finished: Promise<void> };
+    };
+
+    if (
+      viewTransitionDocument.startViewTransition &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      viewTransitionDocument.startViewTransition(applyTheme);
+    } else {
+      applyTheme();
     }
-    setTheme(next);
   };
   return { theme, toggle };
 }

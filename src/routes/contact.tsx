@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Github, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 import { Container, PageHeader } from "@/components/common/ui";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -72,6 +72,28 @@ function Contact() {
                 </span>
               </div>
             </a>
+
+            {profile.socials.find((social) => social.label === "Linkedin") && (
+              <a
+                href={profile.socials.find((social) => social.label === "Linkedin")?.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card hover:shadow-md"
+              >
+                <div className="pointer-events-none absolute -right-10 -top-10 size-28 rounded-full bg-primary/5 blur-2xl transition-all duration-500 group-hover:bg-primary/10" />
+                <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Linkedin className="size-5" />
+                </div>
+                <div>
+                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground/80">
+                    LinkedIn Profile
+                  </span>
+                  <span className="block font-mono text-sm font-bold text-foreground">
+                    linkedin.com/in/devwithsidd
+                  </span>
+                </div>
+              </a>
+            )}
           </div>
         </div>
 

@@ -23,7 +23,10 @@ export function ExternalLink({
 
 export function SectionLabel({ children }: { children: ReactNode }) {
   return (
-    <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-primary">// {children}</p>
+    <p className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.26em] text-primary">
+      <span className="size-1.5 rounded-full bg-primary" aria-hidden />
+      {children}
+    </p>
   );
 }
 

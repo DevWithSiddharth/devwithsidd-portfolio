@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { filterProjects, projects } from "@/data/projects";
 import { runCommand } from "@/components/terminal/commands";
-import { validateContact } from "@/components/contact/ContactForm";
+import { validateContact } from "@/lib/contact";
 import { isSafeUrl } from "@/lib/theme";
 import { SITE_URL, seo } from "@/lib/seo";
 

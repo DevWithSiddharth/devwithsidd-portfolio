@@ -134,7 +134,7 @@ function About() {
             </ul>
           </div>
 
-          {profile.resumeUrl && (
+          {profile.resumeEnabled && profile.resumeUrl && (
             <div className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent p-6 text-center">
               <UserCheck className="mx-auto size-8 text-primary mb-2" />
               <h4 className="text-base font-bold text-foreground">
