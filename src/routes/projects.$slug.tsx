@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -9,6 +9,8 @@ import {
   Github,
   Layers3,
   Monitor,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Container, ExternalLink, StatusBadge } from "@/components/common/ui";
@@ -43,18 +45,45 @@ function ProjectDetail() {
     fit?: "cover" | "contain";
     position?: string;
   } | null>(null);
-  const screenshots = p.placeholder
-    ? []
-    : [
-        ...(p.image &&
-        p.image !== "/projects/preview-placeholder.svg" &&
-        !p.screenshots?.some((screenshot) => screenshot.src === p.image)
-          ? [{ src: p.image, alt: p.imageAlt ?? `${p.name} project screenshot` }]
-          : []),
-        ...(p.screenshots ?? []).filter(
-          (screenshot) => screenshot.src !== "/projects/preview-placeholder.svg",
-        ),
-      ];
+  const screenshots = useMemo(
+    () =>
+      p.placeholder
+        ? []
+        : [
+            ...(p.image &&
+            p.image !== "/projects/preview-placeholder.svg" &&
+            !p.screenshots?.some((screenshot) => screenshot.src === p.image)
+              ? [{ src: p.image, alt: p.imageAlt ?? `${p.name} project screenshot` }]
+              : []),
+            ...(p.screenshots ?? []).filter(
+              (screenshot) => screenshot.src !== "/projects/preview-placeholder.svg",
+            ),
+          ],
+    [p],
+  );
+  const zoomIndex = zoomedScreenshot
+    ? screenshots.findIndex((screenshot) => screenshot.src === zoomedScreenshot.src)
+    : -1;
+
+  const moveZoomedScreenshot = useCallback(
+    (direction: -1 | 1) => {
+      if (screenshots.length === 0 || zoomIndex < 0) return;
+      const nextIndex = (zoomIndex + direction + screenshots.length) % screenshots.length;
+      const nextScreenshot = screenshots[nextIndex];
+      if (nextScreenshot) setZoomedScreenshot(nextScreenshot);
+    },
+    [screenshots, zoomIndex],
+  );
+
+  useEffect(() => {
+    if (!zoomedScreenshot) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") moveZoomedScreenshot(-1);
+      if (event.key === "ArrowRight") moveZoomedScreenshot(1);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [moveZoomedScreenshot, zoomedScreenshot]);
 
   return (
     <Container className="max-w-6xl py-8 md:py-12">
@@ -143,6 +172,31 @@ function ProjectDetail() {
                     {screenshots.length === 1 ? "image" : "images"}
                   </span>
                 </div>
+                {screenshots.length > 0 && (
+                  <div className="-mx-5 mb-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 sm:hidden">
+                    {screenshots.map((screenshot, index) => (
+                      <figure key={screenshot.src} className="w-[82vw] shrink-0 snap-center">
+                        <button
+                          type="button"
+                          onClick={() => setZoomedScreenshot(screenshot)}
+                          aria-label={`Zoom image: ${screenshot.alt}`}
+                          className="group relative block aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-[#090d18] p-1.5 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        >
+                          <img
+                            src={screenshot.src}
+                            alt={screenshot.alt}
+                            style={{ objectPosition: screenshot.position }}
+                            className="size-full rounded-lg object-contain"
+                            loading={index === 0 ? "eager" : "lazy"}
+                          />
+                        </button>
+                        <figcaption className="mt-2 line-clamp-1 font-mono text-[10px] text-muted-foreground">
+                          {String(index + 1).padStart(2, "0")} · {screenshot.alt}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
                 {(() => {
                   const hero =
                     screenshots.find((screenshot) => screenshot.src === p.image) ?? screenshots[0];
@@ -151,7 +205,7 @@ function ProjectDetail() {
                   const bottomImages = gallery.slice(2);
 
                   return (
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-12 sm:items-start">
+                    <div className="hidden grid-cols-1 gap-3 sm:grid sm:grid-cols-12 sm:items-start">
                       {hero && (
                         <ScrollReveal className="sm:col-span-8">
                           <button
@@ -329,12 +383,38 @@ function ProjectDetail() {
               <DialogDescription className="sr-only">
                 Enlarged project screenshot. Press Escape to close.
               </DialogDescription>
-              <img
-                src={zoomedScreenshot.src}
-                alt={zoomedScreenshot.alt}
-                style={{ objectPosition: zoomedScreenshot.position }}
-                className="mx-auto max-h-[88vh] w-auto max-w-full rounded-xl object-contain shadow-2xl"
-              />
+              <div className="relative">
+                <img
+                  src={zoomedScreenshot.src}
+                  alt={zoomedScreenshot.alt}
+                  style={{ objectPosition: zoomedScreenshot.position }}
+                  className="mx-auto max-h-[88vh] w-auto max-w-full rounded-xl object-contain shadow-2xl"
+                />
+                {screenshots.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => moveZoomedScreenshot(-1)}
+                      aria-label="Previous screenshot"
+                      className="absolute left-2 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/70 text-white backdrop-blur-sm transition hover:bg-black/90"
+                    >
+                      <ChevronLeft className="size-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveZoomedScreenshot(1)}
+                      aria-label="Next screenshot"
+                      className="absolute right-2 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-black/70 text-white backdrop-blur-sm transition hover:bg-black/90"
+                    >
+                      <ChevronRight className="size-5" />
+                    </button>
+                  </>
+                )}
+                <p className="mt-2 text-center font-mono text-xs text-white/75">
+                  {String(Math.max(zoomIndex + 1, 1)).padStart(2, "0")} /{" "}
+                  {String(screenshots.length).padStart(2, "0")} · {zoomedScreenshot.alt}
+                </p>
+              </div>
             </>
           )}
         </DialogContent>

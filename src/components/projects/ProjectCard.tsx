@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Github, Star } from "lucide-react";
+import { useState } from "react";
 import type { Project } from "@/data/projects";
 import { ExternalLink, StatusBadge, Tag } from "@/components/common/ui";
 
@@ -17,17 +18,29 @@ const previewStyles: Record<string, string> = {
 
 export function ProjectCard({ project }: { project: Project }) {
   const accent = previewStyles[project.category] ?? previewStyles["Web"];
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lift sm:p-1">
       <div className="relative aspect-[16/10] overflow-hidden rounded-t-[1.35rem] border-b border-border/50 bg-[#090d18]">
         {project.image ? (
-          <img
-            src={project.image}
-            alt={project.imageAlt ?? `Project preview for ${project.name}`}
-            className="absolute inset-[2px] size-[calc(100%-4px)] object-contain transition-transform duration-500 group-hover:scale-[1.015]"
-            loading="lazy"
-          />
+          <>
+            {!imageLoaded && (
+              <div
+                className="absolute inset-0 animate-pulse bg-gradient-to-br from-card via-muted to-card"
+                aria-hidden
+              />
+            )}
+            <img
+              src={project.image}
+              alt={project.imageAlt ?? `Project preview for ${project.name}`}
+              className={`absolute inset-[2px] size-[calc(100%-4px)] object-contain transition-all duration-500 group-hover:scale-[1.015] ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+            />
+          </>
         ) : (
           <>
             <div
@@ -97,6 +110,13 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
         <div className="relative z-10 mt-5 flex items-center gap-3 text-sm">
+          <Link
+            to="/projects/$slug"
+            params={{ slug: project.slug }}
+            className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-primary-foreground shadow-button transition-all hover:-translate-y-0.5"
+          >
+            View project <ArrowUpRight className="size-4" />
+          </Link>
           <ExternalLink
             href={project.github}
             className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground shadow-button transition-all hover:border-primary hover:text-foreground"
